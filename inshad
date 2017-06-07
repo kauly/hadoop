@@ -18,6 +18,8 @@ sudo vi /etc/hosts
 192.168.1.104   slave-01
 
 BAIXAR JAVA
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get update
 sudo apt-get install openjdk-8-jdk
 
 VERIFICAR DIRETORIO QUE O JAVA FOI INSTALADO
