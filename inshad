@@ -1,0 +1,84 @@
+-----INSTALACAO HADOOP----
+CRIAR USUARIO hadoop
+sudo adduser hadoop    *enter..enter..
+
+ADD USER HADOOP NO GRUPO SUDO
+sudo visudo
+#includedir /etc/sudoers.d
+hadoop ALL=(ALL) ALL
+
+LOGAR COM USUARIO HADOOP
+su hadoop
+
+ADICIONAR IP DO MASTER/SLAVES NO HOSTS
+sudo vi /etc/hosts
+127.0.0.1	localhost
+127.0.1.1	PC-Kauly
+192.168.1.103   master
+192.168.1.104   slave-01
+
+BAIXAR JAVA
+sudo apt-get install openjdk-8-jdk
+
+VERIFICAR DIRETORIO QUE O JAVA FOI INSTALADO
+sudo update-alternatives --config java
+java -version
+
+BAIXAR SSH (mesmo se ja estiver instalado!)
+sudo apt-get install openssh-server
+
+GERAR PAR DE CHAVES
+ssh-keygen -t rsa -P ""     *enter..enter..
+
+HABILITAR ACESSO SSH NO MASTER
+cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
+
+TESTAR ACESSO SSH SEM SENHA 
+ssh localhost
+
+MANDAR CHAVE PARA OS SLAVES
+ssh-copy-id -i $HOME/.ssh/id_rsa.pub hadoop@slave
+
+TESTAR ACESSO SSH SEM SENHA AOS SLAVES
+ssh slave
+
+BAIXAR HADOOP
+cd ~
+wget http://ftp.unicamp.br/pub/apache/hadoop/common/hadoop-2.8.0/hadoop-2.8.0.tar.gz
+tar -xzf hadoop-2.8.0.tar.gz
+
+CRIAR VARIAVEIS DE AMBIENTE
+---- vi ~/.bashrc - --- VERIFICAR CAMINHOS!!
+export HADOOP_HOME=/home/hadoop/hadoop-2.8.0
+export PATH=$PATH:$HADOOP_HOME/bin
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+export PATH=$PATH:$JAVA_HOME/bin
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+export HADOOP_INSTALL=$HADOOP_HOME
+---  source ~/.bashrc ----
+
+
+CRIAR ARQUIVO MASTERS 
+cd /home/hadoop/hadoop-2.8.0/etc/hadoop/
+vi masters
+master
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
