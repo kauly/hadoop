@@ -2,7 +2,7 @@
 
 
 CRIAR USUARIO hadoop
-´´´sudo adduser hadoop´´´
+```sudo adduser hadoop```
 
 ADD USER HADOOP NO GRUPO SUDO
 sudo visudo
